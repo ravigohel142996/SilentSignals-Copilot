@@ -6,6 +6,236 @@ st.set_page_config(
     layout="wide"
 )
 
+# Global CSS Design System
+st.markdown("""
+<style>
+    /* Global Background and Color Scheme */
+    .stApp {
+        background-color: #F7F9FC;
+    }
+    
+    /* Sidebar Styling */
+    [data-testid="stSidebar"] {
+        background-color: #E8EDF3;
+    }
+    
+    [data-testid="stSidebar"] .css-1d391kg {
+        padding-top: 2rem;
+    }
+    
+    /* Hide default sidebar title */
+    [data-testid="stSidebar"] h1 {
+        display: none;
+    }
+    
+    /* Card Styling */
+    .card {
+        background-color: #FFFFFF;
+        padding: 2rem;
+        border-radius: 14px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1.5rem;
+    }
+    
+    .feature-card {
+        background-color: #FFFFFF;
+        padding: 1.5rem;
+        border-radius: 14px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1rem;
+        height: 100%;
+    }
+    
+    .insight-card {
+        background-color: #FFFFFF;
+        padding: 2.5rem;
+        border-radius: 14px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .kpi-card {
+        background-color: #FFFFFF;
+        padding: 1.5rem;
+        border-radius: 14px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        height: 100%;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+        text-align: center;
+        padding: 3rem 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #1E293B;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5rem;
+        color: #64748B;
+        margin-bottom: 1rem;
+        font-weight: 400;
+    }
+    
+    .hero-description {
+        font-size: 1.1rem;
+        color: #475569;
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+    
+    /* Section Headers */
+    .section-header {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #1E293B;
+        margin-bottom: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .section-subheader {
+        font-size: 1.1rem;
+        color: #64748B;
+        margin-bottom: 2rem;
+    }
+    
+    /* Form Section Headers */
+    .form-section-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #1E293B;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-section-helper {
+        font-size: 0.95rem;
+        color: #64748B;
+        margin-bottom: 1rem;
+    }
+    
+    /* Primary Button Styling */
+    .stButton > button {
+        background-color: #3B82F6;
+        color: white;
+        border-radius: 14px;
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border: none;
+        width: 100%;
+        margin-top: 1.5rem;
+    }
+    
+    .stButton > button:hover {
+        background-color: #2563EB;
+    }
+    
+    /* Feature Card Titles */
+    .feature-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #1E293B;
+        margin-bottom: 0.75rem;
+    }
+    
+    .feature-description {
+        font-size: 1rem;
+        color: #475569;
+        line-height: 1.5;
+    }
+    
+    /* KPI Styling */
+    .kpi-label {
+        font-size: 0.9rem;
+        color: #64748B;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+    
+    .kpi-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1E293B;
+        margin-bottom: 0.25rem;
+    }
+    
+    .kpi-delta {
+        font-size: 0.9rem;
+        color: #64748B;
+    }
+    
+    /* Zone Colors */
+    .zone-green {
+        color: #10B981;
+        font-weight: 600;
+    }
+    
+    .zone-yellow {
+        color: #F59E0B;
+        font-weight: 600;
+    }
+    
+    .zone-red {
+        color: #EF4444;
+        font-weight: 600;
+    }
+    
+    /* Progress Bar Styling */
+    .stProgress > div > div > div > div {
+        background-color: #3B82F6;
+    }
+    
+    /* Sidebar Footer */
+    .sidebar-footer {
+        position: fixed;
+        bottom: 1rem;
+        font-size: 0.8rem;
+        color: #64748B;
+        padding: 0 1rem;
+        line-height: 1.4;
+    }
+    
+    /* Hide Streamlit branding */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    
+    /* Spacing improvements */
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    
+    /* Form styling */
+    .stForm {
+        background-color: #FFFFFF;
+        padding: 2rem;
+        border-radius: 14px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Selectbox and slider styling */
+    .stSelectbox label, .stSlider label, .stNumberInput label {
+        font-weight: 500;
+        color: #1E293B;
+    }
+    
+    /* Info/Warning/Success boxes */
+    .stAlert {
+        border-radius: 14px;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # Initialize session state for storing user inputs
 if 'analysis_done' not in st.session_state:
     st.session_state.analysis_done = False
@@ -22,12 +252,27 @@ if 'social_interaction' not in st.session_state:
 if 'stress_index' not in st.session_state:
     st.session_state.stress_index = 0
 
-# Sidebar navigation
-st.sidebar.title("Navigation")
+# Sidebar navigation with branding
+st.sidebar.markdown("""
+<div style="padding: 1rem 0 2rem 0;">
+    <h1 style="font-size: 1.8rem; font-weight: 700; color: #1E293B; margin-bottom: 0.5rem;">SilentSignals</h1>
+    <p style="font-size: 0.95rem; color: #64748B; margin: 0;">Detecting hidden stress before it becomes burnout</p>
+</div>
+""", unsafe_allow_html=True)
+
 page = st.sidebar.radio(
-    "Go to",
-    ["Home", "Stress Signal Analysis", "AI Copilot", "About"]
+    "Navigate",
+    ["Home", "Stress Signal Analysis", "AI Copilot", "About"],
+    label_visibility="collapsed"
 )
+
+st.sidebar.markdown("<br><br><br>", unsafe_allow_html=True)
+
+st.sidebar.markdown("""
+<div style="font-size: 0.85rem; color: #64748B; line-height: 1.6; padding-top: 2rem; border-top: 1px solid #CBD5E1;">
+    <strong>Privacy-first</strong> • <strong>No diagnosis</strong> • <strong>Student wellbeing</strong>
+</div>
+""", unsafe_allow_html=True)
 
 # Helper function to calculate stress signal index
 def calculate_stress_index(sleep, screen, deadlines, workload, social):
@@ -156,22 +401,55 @@ def get_recommendation(index, sleep, screen, deadlines, workload, social):
 
 # HOME PAGE
 if page == "Home":
-    st.title("SilentSignals")
-    st.subheader("Detecting hidden stress before it becomes burnout")
-    
+    # Hero Section
     st.markdown("""
-    SilentSignals helps students recognize early stress and burnout signals by analyzing everyday 
-    behavior patterns like sleep, screen time, and workload. We don't ask direct mental health 
-    questions because sometimes the signals speak louder than words.
+    <div class="hero-section">
+        <h1 class="hero-title">SilentSignals</h1>
+        <p class="hero-subtitle">Detecting hidden stress before it becomes burnout</p>
+        <p class="hero-description">
+            We help students recognize early stress signals by analyzing everyday behavior patterns like sleep, screen time, and workload—without asking direct mental health questions.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
     
-    This tool is designed to increase awareness of your lifestyle patterns, not to diagnose or 
-    treat any condition. Think of it as a gentle check-in system that helps you notice patterns 
-    before they become problems.
-    """)
+    # Feature Cards Section
+    st.markdown('<h2 class="section-header" style="text-align: center; margin-top: 3rem;">Why SilentSignals</h2>', unsafe_allow_html=True)
     
-    st.markdown("---")
+    col1, col2, col3 = st.columns(3)
     
-    # Display KPI cards
+    with col1:
+        st.markdown("""
+        <div class="feature-card">
+            <h3 class="feature-title">Early Stress Detection</h3>
+            <p class="feature-description">
+                Catch stress signals before they become burnout. We analyze behavioral patterns that often change before you notice the problem yourself.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div class="feature-card">
+            <h3 class="feature-title">Privacy-First Design</h3>
+            <p class="feature-description">
+                Your data never leaves your browser. No accounts, no tracking, no storage. Complete anonymity and privacy in your wellbeing journey.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown("""
+        <div class="feature-card">
+            <h3 class="feature-title">Explainable Insights</h3>
+            <p class="feature-description">
+                Every score uses transparent, rule-based logic. No black-box algorithms—just clear cause-and-effect relationships you can understand.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # KPI Section
+    st.markdown('<h2 class="section-header" style="text-align: center; margin-top: 3rem;">Your Wellbeing Snapshot</h2>', unsafe_allow_html=True)
+    
     col1, col2, col3 = st.columns(3)
     
     if st.session_state.analysis_done:
@@ -181,112 +459,161 @@ if page == "Home":
         # Calculate burnout risk level
         if stress_index <= 35:
             burnout_risk = "Low"
+            risk_class = "zone-green"
         elif stress_index <= 65:
             burnout_risk = "Moderate"
+            risk_class = "zone-yellow"
         else:
             burnout_risk = "High"
+            risk_class = "zone-red"
         
         # Calculate lifestyle stability (inverse of stress)
         stability_score = 100 - stress_index
         
+        # Get zone class for styling
+        if stress_index <= 35:
+            zone_class = "zone-green"
+        elif stress_index <= 65:
+            zone_class = "zone-yellow"
+        else:
+            zone_class = "zone-red"
+        
         with col1:
-            st.metric(
-                label="Stress Signal Index",
-                value=f"{stress_index}/100",
-                delta=zone_label
-            )
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-label">Stress Signal Index</div>
+                <div class="kpi-value">{stress_index}/100</div>
+                <div class="kpi-delta {zone_class}">{zone_label}</div>
+            </div>
+            """, unsafe_allow_html=True)
         
         with col2:
-            st.metric(
-                label="Burnout Risk Level",
-                value=burnout_risk
-            )
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-label">Burnout Risk Level</div>
+                <div class="kpi-value {risk_class}">{burnout_risk}</div>
+                <div class="kpi-delta">Based on current patterns</div>
+            </div>
+            """, unsafe_allow_html=True)
         
         with col3:
-            st.metric(
-                label="Lifestyle Stability Score",
-                value=f"{stability_score}/100"
-            )
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-label">Lifestyle Stability Score</div>
+                <div class="kpi-value">{stability_score}/100</div>
+                <div class="kpi-delta">Overall balance indicator</div>
+            </div>
+            """, unsafe_allow_html=True)
     else:
         with col1:
-            st.metric(
-                label="Stress Signal Index",
-                value="--/100",
-                help="Complete the Stress Signal Analysis to see your score"
-            )
+            st.markdown("""
+            <div class="kpi-card">
+                <div class="kpi-label">Stress Signal Index</div>
+                <div class="kpi-value">--/100</div>
+                <div class="kpi-delta">Complete analysis to see</div>
+            </div>
+            """, unsafe_allow_html=True)
         
         with col2:
-            st.metric(
-                label="Burnout Risk Level",
-                value="Not analyzed",
-                help="Complete the Stress Signal Analysis to see your risk level"
-            )
+            st.markdown("""
+            <div class="kpi-card">
+                <div class="kpi-label">Burnout Risk Level</div>
+                <div class="kpi-value">Not analyzed</div>
+                <div class="kpi-delta">Complete analysis to see</div>
+            </div>
+            """, unsafe_allow_html=True)
         
         with col3:
-            st.metric(
-                label="Lifestyle Stability Score",
-                value="--/100",
-                help="Complete the Stress Signal Analysis to see your stability score"
-            )
+            st.markdown("""
+            <div class="kpi-card">
+                <div class="kpi-label">Lifestyle Stability Score</div>
+                <div class="kpi-value">--/100</div>
+                <div class="kpi-delta">Complete analysis to see</div>
+            </div>
+            """, unsafe_allow_html=True)
         
+        st.markdown("<br>", unsafe_allow_html=True)
         st.info("Navigate to 'Stress Signal Analysis' to analyze your patterns and see your personalized metrics.")
 
 # STRESS SIGNAL ANALYSIS PAGE
 elif page == "Stress Signal Analysis":
-    st.title("Stress Signal Analysis")
+    # Hero Section
     st.markdown("""
-    Answer a few simple questions about your recent patterns. This analysis uses rule-based logic 
-    to identify potential stress signals in your daily routine.
-    """)
+    <div class="hero-section">
+        <h1 class="hero-title">Stress Signal Analysis</h1>
+        <p class="hero-subtitle">Understanding your patterns</p>
+        <p class="hero-description">
+            Answer a few questions about your recent patterns. This analysis uses transparent, rule-based logic to identify potential stress signals in your daily routine.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
     
-    st.markdown("---")
+    # Centered form container
+    col1, col2, col3 = st.columns([1, 2, 1])
     
-    with st.form("stress_analysis_form"):
-        st.subheader("Your Recent Patterns")
+    with col2:
+        st.markdown('<div class="card">', unsafe_allow_html=True)
         
-        sleep_hours = st.slider(
-            "Average sleep hours per night",
-            min_value=3.0,
-            max_value=10.0,
-            value=7.0,
-            step=0.5,
-            help="How many hours do you typically sleep each night?"
-        )
+        with st.form("stress_analysis_form"):
+            # Sleep & Screen Habits Section
+            st.markdown('<p class="form-section-title">Sleep & Screen Habits</p>', unsafe_allow_html=True)
+            st.markdown('<p class="form-section-helper">How are your rest and digital engagement patterns?</p>', unsafe_allow_html=True)
+            
+            sleep_hours = st.slider(
+                "Average sleep hours per night",
+                min_value=3.0,
+                max_value=10.0,
+                value=7.0,
+                step=0.5,
+                help="How many hours do you typically sleep each night?"
+            )
+            
+            screen_time = st.slider(
+                "Daily screen time (hours)",
+                min_value=1.0,
+                max_value=12.0,
+                value=6.0,
+                step=0.5,
+                help="Total hours spent on screens including study, social media, and entertainment"
+            )
+            
+            # Academic Load Section
+            st.markdown('<p class="form-section-title">Academic Load</p>', unsafe_allow_html=True)
+            st.markdown('<p class="form-section-helper">How are you managing your workload and deadlines?</p>', unsafe_allow_html=True)
+            
+            missed_deadlines = st.number_input(
+                "Missed deadlines this week",
+                min_value=0,
+                max_value=10,
+                value=0,
+                step=1,
+                help="How many deadlines or commitments did you miss this week?"
+            )
+            
+            workload = st.selectbox(
+                "Study workload",
+                options=["Low", "Medium", "High"],
+                index=1,
+                help="How would you describe your current academic workload?"
+            )
+            
+            # Social Routine Section
+            st.markdown('<p class="form-section-title">Social Routine</p>', unsafe_allow_html=True)
+            st.markdown('<p class="form-section-helper">How connected do you feel with others?</p>', unsafe_allow_html=True)
+            
+            social_interaction = st.selectbox(
+                "Social interaction level",
+                options=["Low", "Medium", "High"],
+                index=1,
+                help="How much meaningful social interaction have you had recently?"
+            )
+            
+            # Primary CTA Button
+            submit_button = st.form_submit_button("Analyze Stress Signals")
         
-        screen_time = st.slider(
-            "Daily screen time (hours)",
-            min_value=1.0,
-            max_value=12.0,
-            value=6.0,
-            step=0.5,
-            help="Total hours spent on screens including study, social media, and entertainment"
-        )
-        
-        missed_deadlines = st.number_input(
-            "Missed deadlines this week",
-            min_value=0,
-            max_value=10,
-            value=0,
-            step=1,
-            help="How many deadlines or commitments did you miss this week?"
-        )
-        
-        workload = st.selectbox(
-            "Study workload",
-            options=["Low", "Medium", "High"],
-            index=1,
-            help="How would you describe your current academic workload?"
-        )
-        
-        social_interaction = st.selectbox(
-            "Social interaction level",
-            options=["Low", "Medium", "High"],
-            index=1,
-            help="How much meaningful social interaction have you had recently?"
-        )
-        
-        submit_button = st.form_submit_button("Analyze My Stress Signals")
+        st.markdown('</div>', unsafe_allow_html=True)
     
+    # Results Section (full width)
     if submit_button:
         # Store values in session state
         st.session_state.sleep_hours = sleep_hours
@@ -306,13 +633,18 @@ elif page == "Stress Signal Analysis":
         )
         st.session_state.stress_index = stress_index
         
-        # Display results
-        st.markdown("---")
-        st.subheader("Your Stress Signal Analysis")
+        # Display results in insight card
+        st.markdown('<div class="insight-card">', unsafe_allow_html=True)
+        
+        st.markdown('<h2 class="section-header" style="text-align: center;">Your Stress Signal Analysis</h2>', unsafe_allow_html=True)
         
         # Progress bar
         zone_color, zone_label, status_type = get_stress_zone(stress_index)
-        st.progress(stress_index / 100)
+        
+        # Center the progress bar
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            st.progress(stress_index / 100)
         
         # Zone indicator
         if status_type == "success":
@@ -323,7 +655,7 @@ elif page == "Stress Signal Analysis":
             st.error(f"**{zone_color} Zone: {zone_label}**")
         
         # Explanation
-        st.markdown("### Understanding Your Results")
+        st.markdown('<p class="section-subheader" style="margin-top: 2rem;"><strong>Understanding Your Results</strong></p>', unsafe_allow_html=True)
         explanation = get_stress_explanation(
             stress_index,
             sleep_hours,
@@ -335,7 +667,7 @@ elif page == "Stress Signal Analysis":
         st.markdown(explanation)
         
         # Recommendation
-        st.markdown("### Gentle Recommendations")
+        st.markdown('<p class="section-subheader" style="margin-top: 2rem;"><strong>Gentle Recommendations</strong></p>', unsafe_allow_html=True)
         recommendation = get_recommendation(
             stress_index,
             sleep_hours,
@@ -346,7 +678,8 @@ elif page == "Stress Signal Analysis":
         )
         st.info(recommendation)
         
-        st.markdown("---")
+        st.markdown('</div>', unsafe_allow_html=True)
+        
         st.caption("""
         **Important:** This analysis is for awareness purposes only and is not a medical diagnosis. 
         If you're experiencing significant distress, please reach out to a counselor, trusted friend, 
@@ -359,30 +692,47 @@ elif page == "Stress Signal Analysis":
 
 # AI COPILOT PAGE
 elif page == "AI Copilot":
-    st.title("SilentSignals Copilot")
+    # Hero Section
     st.markdown("""
-    Get personalized insights about your stress patterns and discover small lifestyle adjustments 
-    that might help. All responses are based on the patterns you've shared with us.
-    """)
+    <div class="hero-section">
+        <h1 class="hero-title">Insight Assistant</h1>
+        <p class="hero-subtitle">Understanding your stress patterns</p>
+        <p class="hero-description">
+            Get personalized insights about your stress patterns and discover small lifestyle adjustments that might help. All responses are based on the patterns you've shared with us.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
     
     if not st.session_state.analysis_done:
-        st.warning("Please complete the Stress Signal Analysis first to use the AI Copilot feature.")
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.warning("Please complete the Stress Signal Analysis first to use the Insight Assistant feature.")
+        st.markdown('</div>', unsafe_allow_html=True)
     else:
-        st.markdown("---")
+        # Question selector in a card
+        col1, col2, col3 = st.columns([1, 2, 1])
         
-        question = st.selectbox(
-            "What would you like to ask?",
-            options=[
-                "Why is my stress level rising?",
-                "Which habits affect me the most?",
-                "What small change can help this week?",
-                "Is this burnout or temporary overload?"
-            ]
-        )
+        with col2:
+            st.markdown('<div class="card">', unsafe_allow_html=True)
+            st.markdown('<p class="form-section-title">Ask a Question</p>', unsafe_allow_html=True)
+            st.markdown('<p class="form-section-helper">Select a question to explore your stress patterns more deeply.</p>', unsafe_allow_html=True)
+            
+            question = st.selectbox(
+                "Choose your question:",
+                options=[
+                    "Why is my stress level rising?",
+                    "Which habits affect me the most?",
+                    "What small change can help this week?",
+                    "Is this burnout or temporary overload?"
+                ],
+                label_visibility="collapsed"
+            )
+            
+            ask_button = st.button("Get Insight", use_container_width=True)
+            st.markdown('</div>', unsafe_allow_html=True)
         
-        if st.button("Ask Copilot"):
-            st.markdown("---")
-            st.subheader("Copilot Response")
+        if ask_button:
+            # Response shown in insight card
+            st.markdown('<div class="insight-card">', unsafe_allow_html=True)
             
             sleep = st.session_state.sleep_hours
             screen = st.session_state.screen_time
@@ -393,6 +743,8 @@ elif page == "AI Copilot":
             zone_color, zone_label, _ = get_stress_zone(stress_index)
             
             if question == "Why is my stress level rising?":
+                st.markdown('<h3 class="section-header">Why is my stress level rising?</h3>', unsafe_allow_html=True)
+                
                 response = f"""Based on your recent sleep and workload patterns, here's what the signals suggest:
 
 Your Stress Signal Index of {stress_index}/100 reflects a combination of factors in your daily routine. """
@@ -420,6 +772,8 @@ Your Stress Signal Index of {stress_index}/100 reflects a combination of factors
                 st.info(response)
             
             elif question == "Which habits affect me the most?":
+                st.markdown('<h3 class="section-header">Which habits affect me the most?</h3>', unsafe_allow_html=True)
+                
                 response = "Let me break down which patterns are contributing most to your current stress signals:\n\n"
                 
                 factors_with_impact = []
@@ -458,6 +812,8 @@ Your Stress Signal Index of {stress_index}/100 reflects a combination of factors
                 st.info(response)
             
             elif question == "What small change can help this week?":
+                st.markdown('<h3 class="section-header">What small change can help this week?</h3>', unsafe_allow_html=True)
+                
                 response = "Based on your specific patterns, here's one small, actionable change you could try this week:\n\n"
                 
                 # Prioritize recommendations
@@ -506,6 +862,8 @@ Why this helps: When things are stable, the key is noticing small shifts before 
                 st.success(response)
             
             elif question == "Is this burnout or temporary overload?":
+                st.markdown('<h3 class="section-header">Is this burnout or temporary overload?</h3>', unsafe_allow_html=True)
+                
                 response = f"""Let me help you understand what your patterns suggest:
 
 Your Stress Signal Index is {stress_index}/100, which places you in the **{zone_color} Zone ({zone_label})**. """
@@ -574,14 +932,26 @@ Your patterns show multiple indicators of sustained high stress. This goes beyon
 Remember: These signals don't define you. They're information that can help you make informed decisions about seeking support and adjusting your load."""
                 
                 st.warning(response) if stress_index > 65 else st.info(response)
+            
+            st.markdown('</div>', unsafe_allow_html=True)
 
 # ABOUT PAGE
 elif page == "About":
-    st.title("About SilentSignals")
-    
+    # Hero Section
     st.markdown("""
-    ### Why SilentSignals Exists
+    <div class="hero-section">
+        <h1 class="hero-title">About SilentSignals</h1>
+        <p class="hero-subtitle">Understanding our approach</p>
+        <p class="hero-description">
+            Learn about our privacy-first philosophy, ethical boundaries, and what this tool is designed to do.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
     
+    # Section 1: Why SilentSignals Exists
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-header">Why SilentSignals Exists</h2>', unsafe_allow_html=True)
+    st.markdown("""
     College students face immense pressure, yet many don't recognize burnout until it's already 
     affecting their health, relationships, and academic performance. Traditional mental health 
     screening often feels invasive or clinical, creating barriers for students who aren't ready 
@@ -590,9 +960,13 @@ elif page == "About":
     SilentSignals takes a different approach: we detect stress through everyday behavior patterns 
     that students are already aware of—sleep, screen time, workload, and social connection. By 
     analyzing these "silent signals," we help students recognize pressure before it becomes crisis.
+    """)
+    st.markdown('</div>', unsafe_allow_html=True)
     
-    ### Privacy-First Approach
-    
+    # Section 2: Privacy-First Approach
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-header">Privacy-First Approach</h2>', unsafe_allow_html=True)
+    st.markdown("""
     **Your data never leaves your browser.** SilentSignals runs entirely in your web browser using 
     Streamlit. We don't store, transmit, or share any information you enter. No databases, no 
     cloud storage, no tracking.
@@ -600,13 +974,17 @@ elif page == "About":
     This privacy-first design is intentional. Mental health and stress patterns are deeply personal. 
     You should be able to explore your patterns without worrying about data privacy or who might 
     see your responses.
+    """)
+    st.markdown('</div>', unsafe_allow_html=True)
     
-    ### No Diagnosis, No Treatment
-    
+    # Section 3: Ethical Boundaries
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-header">What This Tool Does NOT Do</h2>', unsafe_allow_html=True)
+    st.markdown("""
     SilentSignals is **not** a diagnostic tool and does **not** provide medical advice or treatment. 
     We don't claim to diagnose depression, anxiety, burnout, or any other mental health condition.
     
-    Instead, we offer:
+    **Instead, we offer:**
     - **Awareness:** Helping you notice patterns in your lifestyle
     - **Explanation:** Showing how daily behaviors contribute to stress signals
     - **Reflection:** Creating space to think about your patterns before they become problems
@@ -614,19 +992,13 @@ elif page == "About":
     
     Think of SilentSignals as a gentle check-in system, like a friend who notices you seem tired 
     lately and suggests you might need more rest. It's information and awareness, not treatment.
+    """)
+    st.markdown('</div>', unsafe_allow_html=True)
     
-    ### Built for Awareness, Not Replacement
-    
-    SilentSignals is designed to complement, not replace, professional support. If you're 
-    experiencing significant distress, persistent mood changes, or thoughts of self-harm, please 
-    reach out to:
-    - Campus counseling services
-    - A trusted friend or family member
-    - A mental health professional
-    - Crisis hotlines (988 in the US for mental health emergencies)
-    
-    ### How SilentSignals Works
-    
+    # Section 4: How It Works
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-header">How SilentSignals Works</h2>', unsafe_allow_html=True)
+    st.markdown("""
     Our approach is completely transparent and rule-based:
     
     1. **Data Collection:** You share basic information about sleep, screen time, missed deadlines, 
@@ -641,67 +1013,23 @@ elif page == "About":
     
     4. **Supportive Guidance:** We offer gentle, non-medical recommendations based on your specific 
        patterns.
-    
-    ### Why It's Unique
-    
-    **Privacy-Absolute:** No data collection, no accounts, no tracking. Your information never 
-    leaves your device.
-    
-    **Non-Clinical:** We focus on behavior patterns, not mental health symptoms. This reduces 
-    stigma and makes the tool accessible to students who aren't ready for clinical assessment.
-    
-    **Explainable:** Every score, zone, and recommendation is based on transparent rules. No 
-    mysterious algorithms—just clear cause-and-effect relationships.
-    
-    **Student-Centered:** Designed specifically for the college experience, where stress often 
-    manifests in academic pressure, sleep disruption, and social isolation.
-    
-    **Preventive:** By catching early signals, we help students make small adjustments before 
-    stress becomes crisis. An ounce of prevention is worth a pound of cure.
-    
-    ### Tech Stack
-    
-    SilentSignals is built with:
-    - **Streamlit:** For the interactive web interface
-    - **Python:** For the rule-based logic
-    - **No external APIs:** Everything runs locally in your browser
-    - **No ML libraries:** Pure deterministic logic, no machine learning
-    
-    This simple, focused tech stack ensures reliability, transparency, and privacy.
-    
-    ### Demo and Hackathon Context
-    
-    SilentSignals was created for the **Snow Fest Hackathon** in the **HealthTech** category. 
-    It demonstrates how technology can support student mental health awareness without requiring 
-    medical expertise, expensive infrastructure, or invasive data collection.
-    
-    **Important Demo Disclaimer:** This is a demonstration application built for educational and 
-    awareness purposes. While the logic is sound and the approach is evidence-informed, this is 
-    not a validated clinical tool. Use it for personal reflection and awareness, not as a 
-    substitute for professional assessment or care.
-    
-    ### Ethical Commitment
-    
-    We are committed to:
-    - **Transparency:** All logic is explainable and non-proprietary
-    - **Safety:** Clear disclaimers about the limitations of the tool
-    - **Privacy:** Absolute commitment to not collecting or storing user data
-    - **Responsibility:** Never claiming to diagnose or treat medical conditions
-    - **Empowerment:** Helping students understand their patterns without creating anxiety
-    
-    ### Get Started
-    
-    Navigate to **Stress Signal Analysis** to begin exploring your patterns. Remember: this is 
-    information for your awareness, not a diagnosis. You're in control of what you do with the 
-    insights.
-    
-    ---
-    
-    **Contact & Feedback**
-    
-    SilentSignals is an open project created with care for student wellbeing. For questions or 
-    feedback about this demo, please reach out through the project repository.
     """)
+    st.markdown('</div>', unsafe_allow_html=True)
     
-    st.markdown("---")
+    # Section 5: When to Seek Professional Help
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-header">Built for Awareness, Not Replacement</h2>', unsafe_allow_html=True)
+    st.markdown("""
+    SilentSignals is designed to complement, not replace, professional support. If you're 
+    experiencing significant distress, persistent mood changes, or thoughts of self-harm, please 
+    reach out to:
+    - Campus counseling services
+    - A trusted friend or family member
+    - A mental health professional
+    - Crisis hotlines (988 in the US for mental health emergencies)
+    
+    Remember: asking for support is a strength, not a weakness.
+    """)
+    st.markdown('</div>', unsafe_allow_html=True)
+    
     st.caption("Built with care for the Snow Fest Hackathon | HealthTech Category | 2024")
