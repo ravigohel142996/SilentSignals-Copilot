@@ -6,166 +6,260 @@ st.set_page_config(
     layout="wide"
 )
 
-# Global CSS Design System
+# Global Premium CSS Design System
 st.markdown("""
 <style>
-    /* Global Background and Color Scheme */
+    /* Global Reset and Base */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    
+    /* Global Background - Soft Gray */
     .stApp {
-        background-color: #F7F9FC;
+        background-color: #F4F6FA;
     }
     
-    /* Sidebar Styling */
+    /* Remove all Streamlit default padding/margins */
+    .block-container {
+        padding-top: 3rem !important;
+        padding-bottom: 4rem !important;
+        padding-left: 3rem !important;
+        padding-right: 3rem !important;
+        max-width: 100% !important;
+    }
+    
+    /* Sidebar - Product Navigation Style */
     [data-testid="stSidebar"] {
-        background-color: #E8EDF3;
+        background-color: #FFFFFF;
+        border-right: 1px solid #E5E7EB;
+        padding: 2rem 1.5rem;
     }
     
-    /* Card Styling */
+    [data-testid="stSidebar"] > div:first-child {
+        padding-top: 2rem;
+    }
+    
+    /* Sidebar Navigation Links */
+    .stRadio > label {
+        display: none !important;
+    }
+    
+    .stRadio > div {
+        gap: 0.5rem;
+    }
+    
+    .stRadio > div > label {
+        background-color: transparent !important;
+        padding: 0.75rem 1rem !important;
+        border-radius: 10px !important;
+        font-size: 0.95rem !important;
+        font-weight: 500 !important;
+        color: #64748B !important;
+        transition: all 0.2s ease !important;
+        border: none !important;
+    }
+    
+    .stRadio > div > label:hover {
+        background-color: #F4F6FA !important;
+        color: #1E293B !important;
+    }
+    
+    .stRadio > div > label[data-baseweb="radio"] > div:first-child {
+        display: none !important;
+    }
+    
+    /* Premium Card System */
     .card {
         background-color: #FFFFFF;
-        padding: 2rem;
-        border-radius: 14px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        margin-bottom: 1.5rem;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        margin-bottom: 2rem;
+        border: 1px solid #F4F6FA;
     }
     
     .feature-card {
         background-color: #FFFFFF;
-        padding: 1.5rem;
-        border-radius: 14px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        margin-bottom: 1rem;
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        margin-bottom: 1.5rem;
         height: 100%;
+        border: 1px solid #F4F6FA;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
     
     .insight-card {
         background-color: #FFFFFF;
-        padding: 2.5rem;
-        border-radius: 14px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-        margin-top: 2rem;
-        margin-bottom: 2rem;
+        padding: 3.5rem;
+        border-radius: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        border: 1px solid #E5E7EB;
     }
     
     .kpi-card {
         background-color: #FFFFFF;
-        padding: 1.5rem;
-        border-radius: 14px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        border-radius: 18px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
         text-align: center;
         height: 100%;
+        border: 1px solid #F4F6FA;
+        transition: transform 0.2s ease;
     }
     
-    /* Hero Section */
+    .kpi-card:hover {
+        transform: translateY(-2px);
+    }
+    
+    /* Hero Section - Full Width Premium */
     .hero-section {
         text-align: center;
-        padding: 3rem 2rem;
-        margin-bottom: 2rem;
+        padding: 4rem 2rem 5rem 2rem;
+        margin-bottom: 3rem;
+        background: linear-gradient(180deg, #FFFFFF 0%, #F4F6FA 100%);
+        border-radius: 24px;
+        margin-left: -3rem;
+        margin-right: -3rem;
+        margin-top: -3rem;
     }
     
     .hero-title {
-        font-size: 3rem;
+        font-size: 4rem;
         font-weight: 700;
         color: #1E293B;
-        margin-bottom: 1rem;
+        margin-bottom: 1.25rem;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
     }
     
     .hero-subtitle {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
         color: #64748B;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         font-weight: 400;
+        letter-spacing: -0.01em;
     }
     
     .hero-description {
-        font-size: 1.1rem;
+        font-size: 1.125rem;
         color: #475569;
-        max-width: 800px;
+        max-width: 700px;
         margin: 0 auto;
-        line-height: 1.6;
+        line-height: 1.7;
+        font-weight: 400;
     }
     
-    /* Section Headers */
+    /* Typography System */
     .section-header {
-        font-size: 1.8rem;
+        font-size: 2rem;
         font-weight: 600;
         color: #1E293B;
-        margin-bottom: 1rem;
-        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+        margin-top: 3rem;
+        letter-spacing: -0.01em;
     }
     
     .section-subheader {
-        font-size: 1.1rem;
+        font-size: 1.125rem;
         color: #64748B;
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
+        line-height: 1.6;
+        font-weight: 400;
     }
     
-    /* Form Section Headers */
     .form-section-title {
-        font-size: 1.2rem;
+        font-size: 1.375rem;
         font-weight: 600;
         color: #1E293B;
-        margin-top: 1.5rem;
-        margin-bottom: 0.5rem;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.01em;
     }
     
     .form-section-helper {
-        font-size: 0.95rem;
+        font-size: 1rem;
         color: #64748B;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
     }
     
-    /* Primary Button Styling */
+    /* Primary Button - Visually Dominant */
     .stButton > button {
-        background-color: #3B82F6;
-        color: white;
-        border-radius: 14px;
-        padding: 0.75rem 2rem;
-        font-size: 1.1rem;
-        font-weight: 600;
-        border: none;
-        width: 100%;
-        margin-top: 1.5rem;
+        background-color: #2563EB !important;
+        color: white !important;
+        border-radius: 16px !important;
+        padding: 1rem 3rem !important;
+        font-size: 1.125rem !important;
+        font-weight: 600 !important;
+        border: none !important;
+        width: 100% !important;
+        margin-top: 2rem !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2) !important;
+        letter-spacing: -0.01em !important;
     }
     
     .stButton > button:hover {
-        background-color: #2563EB;
+        background-color: #1D4ED8 !important;
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3) !important;
+        transform: translateY(-1px) !important;
     }
     
-    /* Feature Card Titles */
+    .stButton > button:active {
+        transform: translateY(0) !important;
+    }
+    
+    /* Feature Cards */
     .feature-title {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         font-weight: 600;
         color: #1E293B;
-        margin-bottom: 0.75rem;
+        margin-bottom: 1rem;
+        letter-spacing: -0.01em;
     }
     
     .feature-description {
-        font-size: 1rem;
+        font-size: 1.0625rem;
         color: #475569;
-        line-height: 1.5;
+        line-height: 1.7;
+        font-weight: 400;
     }
     
     /* KPI Styling */
     .kpi-label {
-        font-size: 0.9rem;
+        font-size: 0.875rem;
         color: #64748B;
         font-weight: 500;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
     }
     
     .kpi-value {
-        font-size: 2rem;
+        font-size: 2.5rem;
         font-weight: 700;
         color: #1E293B;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
     }
     
     .kpi-delta {
-        font-size: 0.9rem;
+        font-size: 0.9375rem;
         color: #64748B;
+        font-weight: 400;
     }
     
-    /* Zone Colors */
+    /* Zone Colors - Softer */
     .zone-green {
         color: #10B981;
         font-weight: 600;
@@ -181,38 +275,118 @@ st.markdown("""
         font-weight: 600;
     }
     
-    /* Progress Bar Styling */
+    /* Progress Bar */
     .stProgress > div > div > div > div {
-        background-color: #3B82F6;
+        background-color: #2563EB !important;
+        border-radius: 10px !important;
     }
     
-    /* Hide Streamlit branding */
+    .stProgress > div > div {
+        background-color: #E5E7EB !important;
+        border-radius: 10px !important;
+        height: 12px !important;
+    }
+    
+    /* Form Elements - Premium Style */
+    .stForm {
+        background-color: #FFFFFF !important;
+        padding: 3rem !important;
+        border-radius: 20px !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+        border: 1px solid #E5E7EB !important;
+    }
+    
+    .stSelectbox label, .stSlider label, .stNumberInput label {
+        font-weight: 500 !important;
+        color: #1E293B !important;
+        font-size: 0.9375rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .stSelectbox > div > div,
+    .stNumberInput > div > div > input {
+        border-radius: 12px !important;
+        border: 1px solid #E5E7EB !important;
+        font-size: 0.9375rem !important;
+    }
+    
+    .stSlider > div > div {
+        padding-top: 0.5rem !important;
+    }
+    
+    /* Alert Boxes - Softer */
+    .stAlert {
+        border-radius: 16px !important;
+        border: none !important;
+        padding: 1.25rem 1.5rem !important;
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+    }
+    
+    [data-baseweb="notification"] {
+        background-color: #F0F9FF !important;
+        border-left: 4px solid #2563EB !important;
+    }
+    
+    /* Success Alert */
+    .stSuccess {
+        background-color: #F0FDF4 !important;
+        color: #166534 !important;
+        border-left: 4px solid #10B981 !important;
+    }
+    
+    /* Warning Alert */
+    .stWarning {
+        background-color: #FFFBEB !important;
+        color: #92400E !important;
+        border-left: 4px solid #F59E0B !important;
+    }
+    
+    /* Error Alert */
+    .stError {
+        background-color: #FEF2F2 !important;
+        color: #991B1B !important;
+        border-left: 4px solid #EF4444 !important;
+    }
+    
+    /* Info Alert */
+    .stInfo {
+        background-color: #F0F9FF !important;
+        color: #1E40AF !important;
+        border-left: 4px solid #2563EB !important;
+    }
+    
+    /* Hide Streamlit Branding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
+    header {visibility: hidden;}
     
-    /* Spacing improvements */
-    .block-container {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+    /* Caption Styling */
+    .caption {
+        font-size: 0.875rem;
+        color: #94A3B8;
+        line-height: 1.5;
+        margin-top: 1rem;
     }
     
-    /* Form styling */
-    .stForm {
-        background-color: #FFFFFF;
-        padding: 2rem;
-        border-radius: 14px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    /* Improved Spacing */
+    h1, h2, h3 {
+        margin-top: 0;
     }
     
-    /* Selectbox and slider styling */
-    .stSelectbox label, .stSlider label, .stNumberInput label {
-        font-weight: 500;
-        color: #1E293B;
+    p {
+        margin-bottom: 0.75rem;
     }
     
-    /* Info/Warning/Success boxes */
-    .stAlert {
-        border-radius: 14px;
+    /* Sidebar Footer */
+    .sidebar-footer {
+        position: fixed;
+        bottom: 2rem;
+        font-size: 0.8125rem;
+        color: #64748B;
+        line-height: 1.6;
+        padding-top: 1.5rem;
+        border-top: 1px solid #E5E7EB;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -233,11 +407,11 @@ if 'social_interaction' not in st.session_state:
 if 'stress_index' not in st.session_state:
     st.session_state.stress_index = 0
 
-# Sidebar navigation with branding
+# Sidebar - Premium Product Navigation
 st.sidebar.markdown("""
-<div style="padding: 1rem 0 2rem 0;">
-    <h1 style="font-size: 1.8rem; font-weight: 700; color: #1E293B; margin-bottom: 0.5rem;">SilentSignals</h1>
-    <p style="font-size: 0.95rem; color: #64748B; margin: 0;">Detecting hidden stress before it becomes burnout</p>
+<div style="padding: 0 0 2.5rem 0;">
+    <h1 style="font-size: 1.625rem; font-weight: 700; color: #1E293B; margin-bottom: 0.5rem; letter-spacing: -0.01em;">SilentSignals</h1>
+    <p style="font-size: 0.875rem; color: #64748B; margin: 0; font-weight: 400; line-height: 1.4;">Detecting hidden stress before it becomes burnout</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -247,11 +421,11 @@ page = st.sidebar.radio(
     label_visibility="collapsed"
 )
 
-st.sidebar.markdown("<br><br><br>", unsafe_allow_html=True)
+st.sidebar.markdown("<br><br><br><br>", unsafe_allow_html=True)
 
 st.sidebar.markdown("""
-<div style="font-size: 0.85rem; color: #64748B; line-height: 1.6; padding-top: 2rem; border-top: 1px solid #CBD5E1;">
-    <strong>Privacy-first</strong> • <strong>No diagnosis</strong> • <strong>Student wellbeing</strong>
+<div style="position: fixed; bottom: 2rem; width: 220px; font-size: 0.8125rem; color: #64748B; line-height: 1.6; padding-top: 1.5rem; border-top: 1px solid #E5E7EB;">
+    Privacy-first • No diagnosis • Student wellbeing
 </div>
 """, unsafe_allow_html=True)
 
@@ -382,28 +556,28 @@ def get_recommendation(index, sleep, screen, deadlines, workload, social):
 
 # HOME PAGE
 if page == "Home":
-    # Hero Section
+    # Hero Section - Full Width
     st.markdown("""
     <div class="hero-section">
         <h1 class="hero-title">SilentSignals</h1>
         <p class="hero-subtitle">Detecting hidden stress before it becomes burnout</p>
         <p class="hero-description">
-            We help students recognize early stress signals by analyzing everyday behavior patterns like sleep, screen time, and workload—without asking direct mental health questions.
+            A premium wellbeing platform that helps you recognize early stress signals through everyday patterns—no direct mental health questions, complete privacy.
         </p>
     </div>
     """, unsafe_allow_html=True)
     
-    # Feature Cards Section
-    st.markdown('<h2 class="section-header" style="text-align: center; margin-top: 3rem;">Why SilentSignals</h2>', unsafe_allow_html=True)
+    # Feature Cards Section - Large & Prominent
+    st.markdown('<h2 class="section-header" style="text-align: center; margin-top: 4rem; margin-bottom: 2.5rem;">Why SilentSignals</h2>', unsafe_allow_html=True)
     
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns(3, gap="large")
     
     with col1:
         st.markdown("""
         <div class="feature-card">
-            <h3 class="feature-title">Early Stress Detection</h3>
+            <h3 class="feature-title">Early Stress Signals</h3>
             <p class="feature-description">
-                Catch stress signals before they become burnout. We analyze behavioral patterns that often change before you notice the problem yourself.
+                Catch stress before it becomes burnout. Our platform analyzes behavioral patterns that change before you notice the problem, giving you time to adjust.
             </p>
         </div>
         """, unsafe_allow_html=True)
@@ -423,15 +597,15 @@ if page == "Home":
         <div class="feature-card">
             <h3 class="feature-title">Explainable Insights</h3>
             <p class="feature-description">
-                Every score uses transparent, rule-based logic. No black-box algorithms—just clear cause-and-effect relationships you can understand.
+                Every score uses transparent logic. No algorithms you can't understand—just clear cause-and-effect relationships.
             </p>
         </div>
         """, unsafe_allow_html=True)
     
-    # KPI Section
-    st.markdown('<h2 class="section-header" style="text-align: center; margin-top: 3rem;">Your Wellbeing Snapshot</h2>', unsafe_allow_html=True)
+    # Insight Cards Section
+    st.markdown('<h2 class="section-header" style="text-align: center; margin-top: 4rem; margin-bottom: 2.5rem;">Your Wellbeing Snapshot</h2>', unsafe_allow_html=True)
     
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns(3, gap="large")
     
     if st.session_state.analysis_done:
         stress_index = st.session_state.stress_index
@@ -505,8 +679,14 @@ if page == "Home":
             </div>
             """, unsafe_allow_html=True)
         
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.info("Navigate to 'Stress Signal Analysis' to analyze your patterns and see your personalized metrics.")
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown("""
+        <div class="card" style="text-align: center; padding: 2.5rem;">
+            <p style="font-size: 1.125rem; color: #64748B; margin: 0;">
+                Navigate to <strong style="color: #2563EB;">Stress Signal Analysis</strong> to analyze your patterns and see your personalized metrics.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
 # STRESS SIGNAL ANALYSIS PAGE
 elif page == "Stress Signal Analysis":
@@ -516,20 +696,20 @@ elif page == "Stress Signal Analysis":
         <h1 class="hero-title">Stress Signal Analysis</h1>
         <p class="hero-subtitle">Understanding your patterns</p>
         <p class="hero-description">
-            Answer a few questions about your recent patterns. This analysis uses transparent, rule-based logic to identify potential stress signals in your daily routine.
+            Share your recent patterns with us. Our transparent analysis identifies potential stress signals in your daily routine.
         </p>
     </div>
     """, unsafe_allow_html=True)
     
-    # Centered form container
-    col1, col2, col3 = st.columns([1, 2, 1])
+    # Centered Premium Form Container
+    col_left, col_center, col_right = st.columns([1, 2.5, 1], gap="large")
     
-    with col2:
-        st.markdown('<div class="card">', unsafe_allow_html=True)
+    with col_center:
+        st.markdown('<div class="card" style="padding: 3.5rem;">', unsafe_allow_html=True)
         
         with st.form("stress_analysis_form"):
-            # Sleep & Screen Habits Section
-            st.markdown('<p class="form-section-title">Sleep & Screen Habits</p>', unsafe_allow_html=True)
+            # Section 1: Sleep & Digital Habits
+            st.markdown('<p class="form-section-title">Sleep & Digital Habits</p>', unsafe_allow_html=True)
             st.markdown('<p class="form-section-helper">How are your rest and digital engagement patterns?</p>', unsafe_allow_html=True)
             
             sleep_hours = st.slider(
@@ -550,7 +730,7 @@ elif page == "Stress Signal Analysis":
                 help="Total hours spent on screens including study, social media, and entertainment"
             )
             
-            # Academic Load Section
+            # Section 2: Academic Load
             st.markdown('<p class="form-section-title">Academic Load</p>', unsafe_allow_html=True)
             st.markdown('<p class="form-section-helper">How are you managing your workload and deadlines?</p>', unsafe_allow_html=True)
             
@@ -570,8 +750,8 @@ elif page == "Stress Signal Analysis":
                 help="How would you describe your current academic workload?"
             )
             
-            # Social Routine Section
-            st.markdown('<p class="form-section-title">Social Routine</p>', unsafe_allow_html=True)
+            # Section 3: Social Balance
+            st.markdown('<p class="form-section-title">Social Balance</p>', unsafe_allow_html=True)
             st.markdown('<p class="form-section-helper">How connected do you feel with others?</p>', unsafe_allow_html=True)
             
             social_interaction = st.selectbox(
@@ -586,7 +766,7 @@ elif page == "Stress Signal Analysis":
         
         st.markdown('</div>', unsafe_allow_html=True)
     
-    # Results Section (full width)
+    # Results Section - Full Width Insight Panel
     if submit_button:
         # Store values in session state
         st.session_state.sleep_hours = sleep_hours
@@ -606,29 +786,35 @@ elif page == "Stress Signal Analysis":
         )
         st.session_state.stress_index = stress_index
         
-        # Display results in insight card
+        # WOW Insight Panel - Premium Results Display
         st.markdown('<div class="insight-card">', unsafe_allow_html=True)
         
-        st.markdown('<h2 class="section-header" style="text-align: center;">Your Stress Signal Analysis</h2>', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header" style="text-align: center; margin-top: 0;">Your Stress Signal Report</h2>', unsafe_allow_html=True)
+        st.markdown('<p class="section-subheader" style="text-align: center;">A calm, professional insight into your patterns</p>', unsafe_allow_html=True)
         
-        # Progress bar
+        # Progress bar - Large stress index bar
         zone_color, zone_label, status_type = get_stress_zone(stress_index)
         
-        # Center the progress bar
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
+        st.markdown('<div style="margin: 2rem 0;">', unsafe_allow_html=True)
+        col_empty1, col_prog, col_empty2 = st.columns([1, 3, 1])
+        with col_prog:
+            st.markdown(f'<p style="text-align: center; font-size: 1.125rem; color: #64748B; margin-bottom: 0.75rem;">Stress Signal Index: <strong style="color: #1E293B; font-size: 1.5rem;">{stress_index}/100</strong></p>', unsafe_allow_html=True)
             st.progress(stress_index / 100)
+        st.markdown('</div>', unsafe_allow_html=True)
         
-        # Zone indicator
-        if status_type == "success":
-            st.success(f"**{zone_color} Zone: {zone_label}**")
-        elif status_type == "warning":
-            st.warning(f"**{zone_color} Zone: {zone_label}**")
-        else:
-            st.error(f"**{zone_color} Zone: {zone_label}**")
+        # Big risk label
+        col_empty1, col_zone, col_empty2 = st.columns([1, 2, 1])
+        with col_zone:
+            if status_type == "success":
+                st.success(f"**{zone_label}** — Your patterns show good balance")
+            elif status_type == "warning":
+                st.warning(f"**{zone_label}** — Some patterns worth addressing")
+            else:
+                st.error(f"**{zone_label}** — Multiple stress indicators detected")
         
-        # Explanation
-        st.markdown('<p class="section-subheader" style="margin-top: 2rem;"><strong>Understanding Your Results</strong></p>', unsafe_allow_html=True)
+        # Consultant-style explanation
+        st.markdown('<div style="margin-top: 3rem;">', unsafe_allow_html=True)
+        st.markdown('<p class="section-subheader" style="margin-bottom: 1rem;"><strong>Understanding Your Results</strong></p>', unsafe_allow_html=True)
         explanation = get_stress_explanation(
             stress_index,
             sleep_hours,
@@ -638,9 +824,11 @@ elif page == "Stress Signal Analysis":
             social_interaction
         )
         st.markdown(explanation)
+        st.markdown('</div>', unsafe_allow_html=True)
         
-        # Recommendation
-        st.markdown('<p class="section-subheader" style="margin-top: 2rem;"><strong>Gentle Recommendations</strong></p>', unsafe_allow_html=True)
+        # Recommendation in softer tone
+        st.markdown('<div style="margin-top: 2rem; background-color: #F0F9FF; padding: 2rem; border-radius: 16px; border-left: 4px solid #2563EB;">', unsafe_allow_html=True)
+        st.markdown('<p class="section-subheader" style="margin-bottom: 1rem; margin-top: 0;"><strong>Supportive Guidance</strong></p>', unsafe_allow_html=True)
         recommendation = get_recommendation(
             stress_index,
             sleep_hours,
@@ -650,44 +838,56 @@ elif page == "Stress Signal Analysis":
             social_interaction
         )
         st.info(recommendation)
+        st.markdown('</div>', unsafe_allow_html=True)
         
         st.markdown('</div>', unsafe_allow_html=True)
         
-        st.caption("""
-        **Important:** This analysis is for awareness purposes only and is not a medical diagnosis. 
-        If you're experiencing significant distress, please reach out to a counselor, trusted friend, 
-        or mental health professional.
-        """)
+        st.markdown("""
+        <p class="caption" style="text-align: center; margin-top: 2rem; color: #94A3B8;">
+            This analysis is for awareness purposes only and is not a medical diagnosis. 
+            If you're experiencing significant distress, please reach out to a counselor or mental health professional.
+        </p>
+        """, unsafe_allow_html=True)
     
     elif st.session_state.analysis_done:
         # Show previous results if available
-        st.info("You have a previous analysis. Submit the form again to update your results.")
+        st.markdown("""
+        <div class="card" style="text-align: center; padding: 2.5rem; margin-top: 2rem;">
+            <p style="font-size: 1.125rem; color: #64748B; margin: 0;">
+                You have a previous analysis. <strong style="color: #2563EB;">Submit the form again</strong> to update your results.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
 # AI COPILOT PAGE
 elif page == "AI Copilot":
     # Hero Section
     st.markdown("""
     <div class="hero-section">
-        <h1 class="hero-title">Insight Assistant</h1>
-        <p class="hero-subtitle">Understanding your stress patterns</p>
+        <h1 class="hero-title">Insight Consultant</h1>
+        <p class="hero-subtitle">Your personal stress pattern advisor</p>
         <p class="hero-description">
-            Get personalized insights about your stress patterns and discover small lifestyle adjustments that might help. All responses are based on the patterns you've shared with us.
+            Explore your stress patterns with our consultant view. Get professional insights and discover small lifestyle adjustments tailored to your unique situation.
         </p>
     </div>
     """, unsafe_allow_html=True)
     
     if not st.session_state.analysis_done:
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-        st.warning("Please complete the Stress Signal Analysis first to use the Insight Assistant feature.")
+        st.markdown('<div class="card" style="text-align: center; padding: 3rem;">', unsafe_allow_html=True)
+        st.markdown("""
+        <p style="font-size: 1.125rem; color: #64748B; margin: 0;">
+            Please complete the <strong style="color: #2563EB;">Stress Signal Analysis</strong> first to access personalized insights.
+        </p>
+        """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
     else:
-        # Question selector in a card
-        col1, col2, col3 = st.columns([1, 2, 1])
+        # Consultant Panel - Question selector
+        col_left, col_center, col_right = st.columns([1, 2.5, 1], gap="large")
         
-        with col2:
-            st.markdown('<div class="card">', unsafe_allow_html=True)
-            st.markdown('<p class="form-section-title">Ask a Question</p>', unsafe_allow_html=True)
-            st.markdown('<p class="form-section-helper">Select a question to explore your stress patterns more deeply.</p>', unsafe_allow_html=True)
+        with col_center:
+            st.markdown('<div class="card" style="padding: 3rem;">', unsafe_allow_html=True)
+            st.markdown('<p class="form-section-title" style="margin-top: 0; text-align: center;">Select Your Question</p>', unsafe_allow_html=True)
+            st.markdown('<p class="form-section-helper" style="text-align: center;">Choose a topic to explore your stress patterns more deeply</p>', unsafe_allow_html=True)
             
             question = st.selectbox(
                 "Choose your question:",
@@ -700,11 +900,11 @@ elif page == "AI Copilot":
                 label_visibility="collapsed"
             )
             
-            ask_button = st.button("Get Insight", use_container_width=True)
+            ask_button = st.button("Get Professional Insight", use_container_width=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         if ask_button:
-            # Response shown in insight card
+            # Advisory Note Style - Structured Explanation Block
             st.markdown('<div class="insight-card">', unsafe_allow_html=True)
             
             sleep = st.session_state.sleep_hours
@@ -716,7 +916,8 @@ elif page == "AI Copilot":
             zone_color, zone_label, _ = get_stress_zone(stress_index)
             
             if question == "Why is my stress level rising?":
-                st.markdown('<h3 class="section-header">Why is my stress level rising?</h3>', unsafe_allow_html=True)
+                st.markdown('<h3 class="section-header" style="margin-top: 0;">Why Your Stress Level Is Rising</h3>', unsafe_allow_html=True)
+                st.markdown('<p style="font-size: 1rem; color: #94A3B8; margin-bottom: 2rem;">Professional assessment based on your patterns</p>', unsafe_allow_html=True)
                 
                 response = f"""Based on your recent sleep and workload patterns, here's what the signals suggest:
 
@@ -745,7 +946,8 @@ Your Stress Signal Index of {stress_index}/100 reflects a combination of factors
                 st.info(response)
             
             elif question == "Which habits affect me the most?":
-                st.markdown('<h3 class="section-header">Which habits affect me the most?</h3>', unsafe_allow_html=True)
+                st.markdown('<h3 class="section-header" style="margin-top: 0;">Your Most Impactful Habits</h3>', unsafe_allow_html=True)
+                st.markdown('<p style="font-size: 1rem; color: #94A3B8; margin-bottom: 2rem;">Prioritized analysis of contributing factors</p>', unsafe_allow_html=True)
                 
                 response = "Let me break down which patterns are contributing most to your current stress signals:\n\n"
                 
@@ -785,7 +987,8 @@ Your Stress Signal Index of {stress_index}/100 reflects a combination of factors
                 st.info(response)
             
             elif question == "What small change can help this week?":
-                st.markdown('<h3 class="section-header">What small change can help this week?</h3>', unsafe_allow_html=True)
+                st.markdown('<h3 class="section-header" style="margin-top: 0;">Recommended Action This Week</h3>', unsafe_allow_html=True)
+                st.markdown('<p style="font-size: 1rem; color: #94A3B8; margin-bottom: 2rem;">One actionable step tailored to your situation</p>', unsafe_allow_html=True)
                 
                 response = "Based on your specific patterns, here's one small, actionable change you could try this week:\n\n"
                 
@@ -835,7 +1038,8 @@ Why this helps: When things are stable, the key is noticing small shifts before 
                 st.success(response)
             
             elif question == "Is this burnout or temporary overload?":
-                st.markdown('<h3 class="section-header">Is this burnout or temporary overload?</h3>', unsafe_allow_html=True)
+                st.markdown('<h3 class="section-header" style="margin-top: 0;">Burnout vs. Temporary Overload</h3>', unsafe_allow_html=True)
+                st.markdown('<p style="font-size: 1rem; color: #94A3B8; margin-bottom: 2rem;">Professional perspective on your current state</p>', unsafe_allow_html=True)
                 
                 response = f"""Let me help you understand what your patterns suggest:
 
@@ -914,95 +1118,117 @@ elif page == "About":
     st.markdown("""
     <div class="hero-section">
         <h1 class="hero-title">About SilentSignals</h1>
-        <p class="hero-subtitle">Understanding our approach</p>
+        <p class="hero-subtitle">Building trust through transparency</p>
         <p class="hero-description">
-            Learn about our privacy-first philosophy, ethical boundaries, and what this tool is designed to do.
+            Learn about our approach, values, and ethical boundaries. Understanding how we work is part of our commitment to you.
         </p>
     </div>
     """, unsafe_allow_html=True)
     
-    # Section 1: Why SilentSignals Exists
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.markdown('<h2 class="section-header">Why SilentSignals Exists</h2>', unsafe_allow_html=True)
+    # Cards with clear visual hierarchy
+    col_left, col_center, col_right = st.columns([0.5, 3, 0.5])
+    
+    with col_center:
+        # Section 1: Purpose
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header" style="margin-top: 0;">Our Purpose</h2>', unsafe_allow_html=True)
+        st.markdown("""
+        <p style="font-size: 1.0625rem; color: #475569; line-height: 1.8;">
+        College students face immense pressure, yet many don't recognize burnout until it affects their health and performance. Traditional mental health screening can feel invasive, creating barriers for students who aren't ready for formal assessment.
+        </p>
+        <p style="font-size: 1.0625rem; color: #475569; line-height: 1.8; margin-top: 1.5rem;">
+        SilentSignals takes a different approach: we detect stress through everyday behavior patterns that you're already aware of—sleep, screen time, workload, and social connection. By analyzing these silent signals, we help you recognize pressure before it becomes crisis.
+        </p>
+        """)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Section 2: Privacy
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header" style="margin-top: 0;">Privacy-First Philosophy</h2>', unsafe_allow_html=True)
+        st.markdown("""
+        <p style="font-size: 1.0625rem; color: #475569; line-height: 1.8;">
+        <strong style="color: #1E293B;">Your data never leaves your browser.</strong> SilentSignals runs entirely in your web browser. We don't store, transmit, or share any information you enter. No databases, no cloud storage, no tracking.
+        </p>
+        <p style="font-size: 1.0625rem; color: #475569; line-height: 1.8; margin-top: 1.5rem;">
+        This privacy-first design is intentional. Mental health patterns are deeply personal. You should be able to explore your wellbeing without worrying about data privacy or who might see your information.
+        </p>
+        """)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Section 3: Boundaries
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header" style="margin-top: 0;">What We Don\'t Do</h2>', unsafe_allow_html=True)
+        st.markdown("""
+        <p style="font-size: 1.0625rem; color: #475569; line-height: 1.8;">
+        SilentSignals is <strong style="color: #1E293B;">not a diagnostic tool</strong> and does <strong style="color: #1E293B;">not provide medical advice</strong>. We don't diagnose depression, anxiety, burnout, or any mental health condition.
+        </p>
+        <div style="background-color: #F4F6FA; padding: 2rem; border-radius: 16px; margin-top: 2rem;">
+            <p style="font-size: 1rem; color: #1E293B; font-weight: 600; margin-bottom: 1rem;">Instead, we offer:</p>
+            <ul style="font-size: 1.0625rem; color: #475569; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+                <li style="margin-bottom: 0.75rem;"><strong>Awareness</strong> — Helping you notice patterns in your lifestyle</li>
+                <li style="margin-bottom: 0.75rem;"><strong>Explanation</strong> — Showing how behaviors contribute to stress signals</li>
+                <li style="margin-bottom: 0.75rem;"><strong>Reflection</strong> — Creating space to think about patterns</li>
+                <li><strong>Guidance</strong> — Suggesting small, non-medical adjustments</li>
+            </ul>
+        </div>
+        <p style="font-size: 1.0625rem; color: #475569; line-height: 1.8; margin-top: 2rem;">
+        Think of SilentSignals as a gentle check-in system—information and awareness, not treatment.
+        </p>
+        """)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Section 4: How It Works
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header" style="margin-top: 0;">How It Works</h2>', unsafe_allow_html=True)
+        st.markdown("""
+        <p style="font-size: 1.0625rem; color: #475569; line-height: 1.8;">
+        Our approach is completely transparent and rule-based. No machine learning, no black-box algorithms. Every calculation follows clear logic that we can explain.
+        </p>
+        <div style="margin-top: 2rem;">
+            <div style="background-color: #F4F6FA; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                <p style="font-size: 1rem; color: #1E293B; font-weight: 600; margin: 0;">1. Data Collection</p>
+                <p style="font-size: 0.9375rem; color: #64748B; margin: 0.5rem 0 0 0;">Share basic information about sleep, screen time, workload, and social patterns</p>
+            </div>
+            <div style="background-color: #F4F6FA; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                <p style="font-size: 1rem; color: #1E293B; font-weight: 600; margin: 0;">2. Rule-Based Analysis</p>
+                <p style="font-size: 0.9375rem; color: #64748B; margin: 0.5rem 0 0 0;">Apply straightforward rules to calculate your Stress Signal Index</p>
+            </div>
+            <div style="background-color: #F4F6FA; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                <p style="font-size: 1rem; color: #1E293B; font-weight: 600; margin: 0;">3. Clear Interpretation</p>
+                <p style="font-size: 0.9375rem; color: #64748B; margin: 0.5rem 0 0 0;">Translate your index into zones with plain-language explanations</p>
+            </div>
+            <div style="background-color: #F4F6FA; padding: 1.5rem; border-radius: 12px;">
+                <p style="font-size: 1rem; color: #1E293B; font-weight: 600; margin: 0;">4. Supportive Guidance</p>
+                <p style="font-size: 0.9375rem; color: #64748B; margin: 0.5rem 0 0 0;">Offer gentle, non-medical recommendations based on your patterns</p>
+            </div>
+        </div>
+        """)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Section 5: When to Seek Help
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header" style="margin-top: 0;">When to Seek Professional Support</h2>', unsafe_allow_html=True)
+        st.markdown("""
+        <p style="font-size: 1.0625rem; color: #475569; line-height: 1.8;">
+        SilentSignals complements professional support—it doesn't replace it. If you're experiencing significant distress, persistent mood changes, or thoughts of self-harm, please reach out to:
+        </p>
+        <div style="background-color: #FEF2F2; padding: 2rem; border-radius: 16px; margin-top: 2rem; border-left: 4px solid #EF4444;">
+            <ul style="font-size: 1.0625rem; color: #475569; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+                <li style="margin-bottom: 0.75rem;">Campus counseling services</li>
+                <li style="margin-bottom: 0.75rem;">A trusted friend or family member</li>
+                <li style="margin-bottom: 0.75rem;">A mental health professional</li>
+                <li>Crisis hotlines (988 in the US)</li>
+            </ul>
+        </div>
+        <p style="font-size: 1.0625rem; color: #475569; line-height: 1.8; margin-top: 2rem;">
+        <strong style="color: #1E293B;">Remember:</strong> Asking for support is a strength, not a weakness.
+        </p>
+        """)
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("""
-    College students face immense pressure, yet many don't recognize burnout until it's already 
-    affecting their health, relationships, and academic performance. Traditional mental health 
-    screening often feels invasive or clinical, creating barriers for students who aren't ready 
-    to seek formal help.
-    
-    SilentSignals takes a different approach: we detect stress through everyday behavior patterns 
-    that students are already aware of—sleep, screen time, workload, and social connection. By 
-    analyzing these "silent signals," we help students recognize pressure before it becomes crisis.
-    """)
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Section 2: Privacy-First Approach
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.markdown('<h2 class="section-header">Privacy-First Approach</h2>', unsafe_allow_html=True)
-    st.markdown("""
-    **Your data never leaves your browser.** SilentSignals runs entirely in your web browser using 
-    Streamlit. We don't store, transmit, or share any information you enter. No databases, no 
-    cloud storage, no tracking.
-    
-    This privacy-first design is intentional. Mental health and stress patterns are deeply personal. 
-    You should be able to explore your patterns without worrying about data privacy or who might 
-    see your responses.
-    """)
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Section 3: Ethical Boundaries
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.markdown('<h2 class="section-header">What This Tool Does NOT Do</h2>', unsafe_allow_html=True)
-    st.markdown("""
-    SilentSignals is **not** a diagnostic tool and does **not** provide medical advice or treatment. 
-    We don't claim to diagnose depression, anxiety, burnout, or any other mental health condition.
-    
-    **Instead, we offer:**
-    - **Awareness:** Helping you notice patterns in your lifestyle
-    - **Explanation:** Showing how daily behaviors contribute to stress signals
-    - **Reflection:** Creating space to think about your patterns before they become problems
-    - **Guidance:** Suggesting small, non-medical adjustments that might help
-    
-    Think of SilentSignals as a gentle check-in system, like a friend who notices you seem tired 
-    lately and suggests you might need more rest. It's information and awareness, not treatment.
-    """)
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Section 4: How It Works
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.markdown('<h2 class="section-header">How SilentSignals Works</h2>', unsafe_allow_html=True)
-    st.markdown("""
-    Our approach is completely transparent and rule-based:
-    
-    1. **Data Collection:** You share basic information about sleep, screen time, missed deadlines, 
-       workload, and social interaction.
-    
-    2. **Rule-Based Analysis:** We apply straightforward, explainable rules to calculate a Stress 
-       Signal Index. No machine learning, no black-box algorithms. Every calculation follows clear 
-       logic that we can explain.
-    
-    3. **Interpretation:** We translate your index into zones (Green/Yellow/Red) and provide 
-       plain-language explanations of what your patterns suggest.
-    
-    4. **Supportive Guidance:** We offer gentle, non-medical recommendations based on your specific 
-       patterns.
-    """)
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Section 5: When to Seek Professional Help
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.markdown('<h2 class="section-header">Built for Awareness, Not Replacement</h2>', unsafe_allow_html=True)
-    st.markdown("""
-    SilentSignals is designed to complement, not replace, professional support. If you're 
-    experiencing significant distress, persistent mood changes, or thoughts of self-harm, please 
-    reach out to:
-    - Campus counseling services
-    - A trusted friend or family member
-    - A mental health professional
-    - Crisis hotlines (988 in the US for mental health emergencies)
-    
-    Remember: asking for support is a strength, not a weakness.
-    """)
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.caption("Built with care for the Snow Fest Hackathon | HealthTech Category | 2024")
+    <p class="caption" style="text-align: center; color: #94A3B8;">
+        Built with care for the Snow Fest Hackathon • HealthTech Category • 2024
+    </p>
+    """, unsafe_allow_html=True)
