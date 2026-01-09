@@ -3,8 +3,91 @@ import streamlit as st
 # MUST be the first Streamlit command
 st.set_page_config(
     page_title="SilentSignals",
-    layout="wide"
+    layout="wide",
+    page_icon="🧠"
 )
+
+# Custom CSS for premium, calm UI
+st.markdown("""
+<style>
+    /* Global styling */
+    .main {
+        background-color: #ffffff;
+    }
+    
+    /* Section headers */
+    h1 {
+        color: #1a1a1a;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    
+    h2 {
+        color: #2c3e50;
+        font-weight: 600;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    h3 {
+        color: #34495e;
+        font-weight: 600;
+        margin-top: 1.5rem;
+    }
+    
+    /* Accent color for interactive elements */
+    .stButton>button {
+        background-color: #4F8BF9;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.6rem 2rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .stButton>button:hover {
+        background-color: #3a7ae0;
+        box-shadow: 0 4px 12px rgba(79, 139, 249, 0.3);
+    }
+    
+    /* Sidebar styling */
+    [data-testid="stSidebar"] {
+        background-color: #f8f9fa;
+    }
+    
+    /* Metric cards */
+    [data-testid="stMetricValue"] {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #4F8BF9;
+    }
+    
+    /* Info boxes */
+    .stAlert {
+        border-radius: 8px;
+        border-left: 4px solid #4F8BF9;
+    }
+    
+    /* Form elements */
+    .stSelectbox, .stSlider {
+        margin-bottom: 1rem;
+    }
+    
+    /* Dividers */
+    hr {
+        margin: 2rem 0;
+        border: none;
+        border-top: 1px solid #e0e0e0;
+    }
+    
+    /* Caption text */
+    .stCaption {
+        color: #7f8c8d;
+        font-size: 0.9rem;
+    }
+</style>
+""", unsafe_allow_html=True)
 
 # Initialize session state for storing user inputs
 if 'analysis_done' not in st.session_state:
@@ -22,12 +105,20 @@ if 'social_interaction' not in st.session_state:
 if 'stress_index' not in st.session_state:
     st.session_state.stress_index = 0
 
-# Sidebar navigation
-st.sidebar.title("Navigation")
+# Sidebar navigation with enhanced UI
+st.sidebar.markdown("# 🧠 SilentSignals")
+st.sidebar.caption("Early stress awareness")
+st.sidebar.divider()
+
+st.sidebar.markdown("### Navigation")
 page = st.sidebar.radio(
     "Go to",
-    ["Home", "Stress Signal Analysis", "AI Copilot", "About"]
+    ["Home", "Stress Signal Analysis", "AI Copilot", "About"],
+    label_visibility="collapsed"
 )
+
+st.sidebar.divider()
+st.sidebar.caption("Privacy-first • No diagnosis • Student-focused")
 
 # Helper function to calculate stress signal index
 def calculate_stress_index(sleep, screen, deadlines, workload, social):
@@ -156,22 +247,22 @@ def get_recommendation(index, sleep, screen, deadlines, workload, social):
 
 # HOME PAGE
 if page == "Home":
-    st.title("SilentSignals")
-    st.subheader("Detecting hidden stress before it becomes burnout")
+    # Hero Section
+    st.markdown("# 🧠 SilentSignals")
+    st.markdown("### Detecting hidden stress before it becomes burnout")
+    st.caption("A calm, privacy-first tool for early stress awareness")
     
+    st.markdown("")
     st.markdown("""
     SilentSignals helps students recognize early stress and burnout signals by analyzing everyday 
     behavior patterns like sleep, screen time, and workload. We don't ask direct mental health 
     questions because sometimes the signals speak louder than words.
-    
-    This tool is designed to increase awareness of your lifestyle patterns, not to diagnose or 
-    treat any condition. Think of it as a gentle check-in system that helps you notice patterns 
-    before they become problems.
     """)
     
-    st.markdown("---")
+    st.divider()
     
-    # Display KPI cards
+    # KPI Section
+    st.markdown("### Your Stress Overview")
     col1, col2, col3 = st.columns(3)
     
     if st.session_state.analysis_done:
@@ -181,111 +272,164 @@ if page == "Home":
         # Calculate burnout risk level
         if stress_index <= 35:
             burnout_risk = "Low"
+            risk_delta = "Stable"
         elif stress_index <= 65:
             burnout_risk = "Moderate"
+            risk_delta = "Monitor"
         else:
             burnout_risk = "High"
+            risk_delta = "Attention"
         
         # Calculate lifestyle stability (inverse of stress)
         stability_score = 100 - stress_index
         
         with col1:
             st.metric(
-                label="Stress Signal Index",
+                label="🔍 Stress Signal Index",
                 value=f"{stress_index}/100",
-                delta=zone_label
+                delta=zone_label,
+                delta_color="inverse"
             )
         
         with col2:
             st.metric(
-                label="Burnout Risk Level",
-                value=burnout_risk
+                label="⚠️ Burnout Risk Level",
+                value=burnout_risk,
+                delta=risk_delta,
+                delta_color="off"
             )
         
         with col3:
             st.metric(
-                label="Lifestyle Stability Score",
-                value=f"{stability_score}/100"
+                label="💚 Lifestyle Stability",
+                value=f"{stability_score}/100",
+                delta="Balance score"
             )
     else:
         with col1:
             st.metric(
-                label="Stress Signal Index",
-                value="--/100",
-                help="Complete the Stress Signal Analysis to see your score"
+                label="🔍 Stress Signal Index",
+                value="--",
             )
+            st.caption("Complete analysis to see your score")
         
         with col2:
             st.metric(
-                label="Burnout Risk Level",
-                value="Not analyzed",
-                help="Complete the Stress Signal Analysis to see your risk level"
+                label="⚠️ Burnout Risk Level",
+                value="--",
             )
+            st.caption("Complete analysis to see risk level")
         
         with col3:
             st.metric(
-                label="Lifestyle Stability Score",
-                value="--/100",
-                help="Complete the Stress Signal Analysis to see your stability score"
+                label="💚 Lifestyle Stability",
+                value="--",
             )
+            st.caption("Complete analysis to see stability")
         
-        st.info("Navigate to 'Stress Signal Analysis' to analyze your patterns and see your personalized metrics.")
+        st.info("📊 Navigate to **Stress Signal Analysis** to analyze your patterns and see personalized metrics.")
+    
+    st.divider()
+    
+    # Info Section
+    st.markdown("### Why SilentSignals?")
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("#### 🎯 Why Use It")
+        st.markdown("""
+        Recognize stress patterns before they escalate. We analyze everyday behaviors 
+        to provide early awareness of burnout signals.
+        """)
+    
+    with col2:
+        st.markdown("#### 🔄 How It Works")
+        st.markdown("""
+        Share your recent patterns → Get your Stress Signal Index → 
+        Understand contributing factors → Receive gentle recommendations.
+        """)
+    
+    with col3:
+        st.markdown("#### 👥 Who It Helps")
+        st.markdown("""
+        Students facing academic pressure, balancing workload, or wanting 
+        to maintain wellbeing through early awareness.
+        """)
+    
+    st.divider()
+    st.caption("This tool provides awareness, not diagnosis. Always reach out for professional support when needed.")
 
 # STRESS SIGNAL ANALYSIS PAGE
 elif page == "Stress Signal Analysis":
-    st.title("Stress Signal Analysis")
-    st.markdown("""
-    Answer a few simple questions about your recent patterns. This analysis uses rule-based logic 
-    to identify potential stress signals in your daily routine.
-    """)
+    st.markdown("# 📊 Stress Signal Analysis")
+    st.caption("Answer a few questions about your recent patterns to identify potential stress signals")
     
-    st.markdown("---")
+    st.divider()
     
-    with st.form("stress_analysis_form"):
-        st.subheader("Your Recent Patterns")
-        
-        sleep_hours = st.slider(
-            "Average sleep hours per night",
-            min_value=3.0,
-            max_value=10.0,
-            value=7.0,
-            step=0.5,
-            help="How many hours do you typically sleep each night?"
-        )
-        
-        screen_time = st.slider(
-            "Daily screen time (hours)",
-            min_value=1.0,
-            max_value=12.0,
-            value=6.0,
-            step=0.5,
-            help="Total hours spent on screens including study, social media, and entertainment"
-        )
-        
-        missed_deadlines = st.number_input(
-            "Missed deadlines this week",
-            min_value=0,
-            max_value=10,
-            value=0,
-            step=1,
-            help="How many deadlines or commitments did you miss this week?"
-        )
-        
-        workload = st.selectbox(
-            "Study workload",
-            options=["Low", "Medium", "High"],
-            index=1,
-            help="How would you describe your current academic workload?"
-        )
-        
-        social_interaction = st.selectbox(
-            "Social interaction level",
-            options=["Low", "Medium", "High"],
-            index=1,
-            help="How much meaningful social interaction have you had recently?"
-        )
-        
-        submit_button = st.form_submit_button("Analyze My Stress Signals")
+    # Create a centered container for the form
+    col_spacer1, col_form, col_spacer2 = st.columns([1, 3, 1])
+    
+    with col_form:
+        with st.form("stress_analysis_form"):
+            st.markdown("### Your Recent Patterns")
+            st.caption("All information stays private in your browser")
+            
+            st.markdown("")
+            
+            # Sleep & Screen Section
+            st.markdown("##### 😴 Sleep & Screen Time")
+            sleep_hours = st.slider(
+                "Average sleep hours per night",
+                min_value=3.0,
+                max_value=10.0,
+                value=7.0,
+                step=0.5,
+            )
+            st.caption("Recommended: 7-9 hours for optimal recovery")
+            
+            screen_time = st.slider(
+                "Daily screen time (hours)",
+                min_value=1.0,
+                max_value=12.0,
+                value=6.0,
+                step=0.5,
+            )
+            st.caption("Includes study, social media, and entertainment")
+            
+            st.markdown("")
+            
+            # Workload & Deadlines Section
+            st.markdown("##### 📚 Workload & Deadlines")
+            missed_deadlines = st.number_input(
+                "Missed deadlines this week",
+                min_value=0,
+                max_value=10,
+                value=0,
+                step=1,
+            )
+            st.caption("How many deadlines or commitments did you miss?")
+            
+            workload = st.selectbox(
+                "Study workload",
+                options=["Low", "Medium", "High"],
+                index=1,
+            )
+            st.caption("Your current academic workload level")
+            
+            st.markdown("")
+            
+            # Social Interaction Section
+            st.markdown("##### 👥 Social Interaction")
+            social_interaction = st.selectbox(
+                "Social interaction level",
+                options=["Low", "Medium", "High"],
+                index=1,
+            )
+            st.caption("Meaningful social connections in recent days")
+            
+            st.markdown("")
+            
+            submit_button = st.form_submit_button("🔍 Analyze My Stress Signals", use_container_width=True)
     
     if submit_button:
         # Store values in session state
@@ -307,23 +451,27 @@ elif page == "Stress Signal Analysis":
         st.session_state.stress_index = stress_index
         
         # Display results
-        st.markdown("---")
-        st.subheader("Your Stress Signal Analysis")
+        st.divider()
+        st.markdown("## Your Stress Signals")
         
         # Progress bar
         zone_color, zone_label, status_type = get_stress_zone(stress_index)
         st.progress(stress_index / 100)
         
-        # Zone indicator
+        st.markdown("")
+        
+        # Zone indicator with color coding
         if status_type == "success":
-            st.success(f"**{zone_color} Zone: {zone_label}**")
+            st.success(f"**{zone_color} Zone: {zone_label}** — Your patterns show good balance")
         elif status_type == "warning":
-            st.warning(f"**{zone_color} Zone: {zone_label}**")
+            st.warning(f"**{zone_color} Zone: {zone_label}** — Some patterns suggest increased pressure")
         else:
-            st.error(f"**{zone_color} Zone: {zone_label}**")
+            st.error(f"**{zone_color} Zone: {zone_label}** — Multiple signals indicate significant pressure")
+        
+        st.markdown("")
         
         # Explanation
-        st.markdown("### Understanding Your Results")
+        st.markdown("#### Understanding Your Results")
         explanation = get_stress_explanation(
             stress_index,
             sleep_hours,
@@ -334,8 +482,10 @@ elif page == "Stress Signal Analysis":
         )
         st.markdown(explanation)
         
+        st.markdown("")
+        
         # Recommendation
-        st.markdown("### Gentle Recommendations")
+        st.markdown("#### Gentle Recommendations")
         recommendation = get_recommendation(
             stress_index,
             sleep_hours,
@@ -346,7 +496,7 @@ elif page == "Stress Signal Analysis":
         )
         st.info(recommendation)
         
-        st.markdown("---")
+        st.divider()
         st.caption("""
         **Important:** This analysis is for awareness purposes only and is not a medical diagnosis. 
         If you're experiencing significant distress, please reach out to a counselor, trusted friend, 
@@ -355,34 +505,43 @@ elif page == "Stress Signal Analysis":
     
     elif st.session_state.analysis_done:
         # Show previous results if available
-        st.info("You have a previous analysis. Submit the form again to update your results.")
+        st.info("💡 You have a previous analysis saved. Submit the form again to update your results.")
 
 # AI COPILOT PAGE
 elif page == "AI Copilot":
-    st.title("SilentSignals Copilot")
+    st.markdown("# 🤖 AI Copilot")
+    st.caption("Get personalized insights about your stress patterns")
+    
+    st.markdown("")
     st.markdown("""
-    Get personalized insights about your stress patterns and discover small lifestyle adjustments 
+    Ask questions about your stress patterns and discover small lifestyle adjustments 
     that might help. All responses are based on the patterns you've shared with us.
     """)
     
     if not st.session_state.analysis_done:
-        st.warning("Please complete the Stress Signal Analysis first to use the AI Copilot feature.")
+        st.divider()
+        st.warning("⚠️ Please complete the **Stress Signal Analysis** first to use the AI Copilot feature.")
+        st.markdown("")
+        st.info("💡 The Copilot needs your analysis results to provide personalized insights.")
     else:
-        st.markdown("---")
+        st.divider()
         
+        st.markdown("### What would you like to know?")
         question = st.selectbox(
-            "What would you like to ask?",
+            "Select a question:",
             options=[
                 "Why is my stress level rising?",
                 "Which habits affect me the most?",
                 "What small change can help this week?",
                 "Is this burnout or temporary overload?"
-            ]
+            ],
+            label_visibility="collapsed"
         )
         
-        if st.button("Ask Copilot"):
-            st.markdown("---")
-            st.subheader("Copilot Response")
+        st.markdown("")
+        
+        if st.button("💬 Ask Copilot", use_container_width=False):
+            st.divider()
             
             sleep = st.session_state.sleep_hours
             screen = st.session_state.screen_time
@@ -391,6 +550,12 @@ elif page == "AI Copilot":
             social = st.session_state.social_interaction
             stress_index = st.session_state.stress_index
             zone_color, zone_label, _ = get_stress_zone(stress_index)
+            
+            # Create bordered container for response
+            st.markdown(f"### Copilot Response")
+            st.caption(f"Based on your Stress Signal Index of {stress_index}/100")
+            
+            st.markdown("")
             
             if question == "Why is my stress level rising?":
                 response = f"""Based on your recent sleep and workload patterns, here's what the signals suggest:
@@ -574,134 +739,140 @@ Your patterns show multiple indicators of sustained high stress. This goes beyon
 Remember: These signals don't define you. They're information that can help you make informed decisions about seeking support and adjusting your load."""
                 
                 st.warning(response) if stress_index > 65 else st.info(response)
+            
+            st.divider()
+            st.caption("💡 Copilot responses are based on your submitted patterns and rule-based analysis.")
 
 # ABOUT PAGE
 elif page == "About":
-    st.title("About SilentSignals")
+    st.markdown("# ℹ️ About SilentSignals")
+    st.caption("Privacy-first stress awareness for students")
     
+    st.divider()
+    
+    # Purpose Section
+    st.markdown("### 🎯 Purpose")
     st.markdown("""
-    ### Why SilentSignals Exists
-    
     College students face immense pressure, yet many don't recognize burnout until it's already 
-    affecting their health, relationships, and academic performance. Traditional mental health 
-    screening often feels invasive or clinical, creating barriers for students who aren't ready 
-    to seek formal help.
+    affecting their health, relationships, and academic performance.
     
-    SilentSignals takes a different approach: we detect stress through everyday behavior patterns 
+    **SilentSignals takes a different approach:** We detect stress through everyday behavior patterns 
     that students are already aware of—sleep, screen time, workload, and social connection. By 
     analyzing these "silent signals," we help students recognize pressure before it becomes crisis.
-    
-    ### Privacy-First Approach
-    
-    **Your data never leaves your browser.** SilentSignals runs entirely in your web browser using 
-    Streamlit. We don't store, transmit, or share any information you enter. No databases, no 
-    cloud storage, no tracking.
-    
-    This privacy-first design is intentional. Mental health and stress patterns are deeply personal. 
-    You should be able to explore your patterns without worrying about data privacy or who might 
-    see your responses.
-    
-    ### No Diagnosis, No Treatment
-    
-    SilentSignals is **not** a diagnostic tool and does **not** provide medical advice or treatment. 
-    We don't claim to diagnose depression, anxiety, burnout, or any other mental health condition.
-    
-    Instead, we offer:
-    - **Awareness:** Helping you notice patterns in your lifestyle
-    - **Explanation:** Showing how daily behaviors contribute to stress signals
-    - **Reflection:** Creating space to think about your patterns before they become problems
-    - **Guidance:** Suggesting small, non-medical adjustments that might help
-    
-    Think of SilentSignals as a gentle check-in system, like a friend who notices you seem tired 
-    lately and suggests you might need more rest. It's information and awareness, not treatment.
-    
-    ### Built for Awareness, Not Replacement
-    
-    SilentSignals is designed to complement, not replace, professional support. If you're 
-    experiencing significant distress, persistent mood changes, or thoughts of self-harm, please 
-    reach out to:
-    - Campus counseling services
-    - A trusted friend or family member
-    - A mental health professional
-    - Crisis hotlines (988 in the US for mental health emergencies)
-    
-    ### How SilentSignals Works
-    
-    Our approach is completely transparent and rule-based:
-    
-    1. **Data Collection:** You share basic information about sleep, screen time, missed deadlines, 
-       workload, and social interaction.
-    
-    2. **Rule-Based Analysis:** We apply straightforward, explainable rules to calculate a Stress 
-       Signal Index. No machine learning, no black-box algorithms. Every calculation follows clear 
-       logic that we can explain.
-    
-    3. **Interpretation:** We translate your index into zones (Green/Yellow/Red) and provide 
-       plain-language explanations of what your patterns suggest.
-    
-    4. **Supportive Guidance:** We offer gentle, non-medical recommendations based on your specific 
-       patterns.
-    
-    ### Why It's Unique
-    
-    **Privacy-Absolute:** No data collection, no accounts, no tracking. Your information never 
-    leaves your device.
-    
-    **Non-Clinical:** We focus on behavior patterns, not mental health symptoms. This reduces 
-    stigma and makes the tool accessible to students who aren't ready for clinical assessment.
-    
-    **Explainable:** Every score, zone, and recommendation is based on transparent rules. No 
-    mysterious algorithms—just clear cause-and-effect relationships.
-    
-    **Student-Centered:** Designed specifically for the college experience, where stress often 
-    manifests in academic pressure, sleep disruption, and social isolation.
-    
-    **Preventive:** By catching early signals, we help students make small adjustments before 
-    stress becomes crisis. An ounce of prevention is worth a pound of cure.
-    
-    ### Tech Stack
-    
-    SilentSignals is built with:
-    - **Streamlit:** For the interactive web interface
-    - **Python:** For the rule-based logic
-    - **No external APIs:** Everything runs locally in your browser
-    - **No ML libraries:** Pure deterministic logic, no machine learning
-    
-    This simple, focused tech stack ensures reliability, transparency, and privacy.
-    
-    ### Demo and Hackathon Context
-    
-    SilentSignals was created for the **Snow Fest Hackathon** in the **HealthTech** category. 
-    It demonstrates how technology can support student mental health awareness without requiring 
-    medical expertise, expensive infrastructure, or invasive data collection.
-    
-    **Important Demo Disclaimer:** This is a demonstration application built for educational and 
-    awareness purposes. While the logic is sound and the approach is evidence-informed, this is 
-    not a validated clinical tool. Use it for personal reflection and awareness, not as a 
-    substitute for professional assessment or care.
-    
-    ### Ethical Commitment
-    
-    We are committed to:
-    - **Transparency:** All logic is explainable and non-proprietary
-    - **Safety:** Clear disclaimers about the limitations of the tool
-    - **Privacy:** Absolute commitment to not collecting or storing user data
-    - **Responsibility:** Never claiming to diagnose or treat medical conditions
-    - **Empowerment:** Helping students understand their patterns without creating anxiety
-    
-    ### Get Started
-    
-    Navigate to **Stress Signal Analysis** to begin exploring your patterns. Remember: this is 
-    information for your awareness, not a diagnosis. You're in control of what you do with the 
-    insights.
-    
-    ---
-    
-    **Contact & Feedback**
-    
-    SilentSignals is an open project created with care for student wellbeing. For questions or 
-    feedback about this demo, please reach out through the project repository.
     """)
     
-    st.markdown("---")
-    st.caption("Built with care for the Snow Fest Hackathon | HealthTech Category | 2024")
+    st.divider()
+    
+    # How It Works Section
+    st.markdown("### 🔄 How SilentSignals Works")
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("""
+        **1. Data Collection**
+        - Sleep duration
+        - Screen time
+        - Missed deadlines
+        - Study workload
+        - Social interaction
+        """)
+        
+        st.markdown("""
+        **2. Rule-Based Analysis**
+        - Transparent calculations
+        - No black-box algorithms
+        - Every score is explainable
+        """)
+    
+    with col2:
+        st.markdown("""
+        **3. Zone Classification**
+        - Green: Stable patterns
+        - Yellow: Rising stress signals
+        - Red: Burnout risk indicators
+        """)
+        
+        st.markdown("""
+        **4. Supportive Guidance**
+        - Personalized insights
+        - Gentle recommendations
+        - Non-medical advice
+        """)
+    
+    st.divider()
+    
+    # Ethics & Privacy Section
+    st.markdown("### 🔒 Ethics & Privacy")
+    st.markdown("""
+    **Your data never leaves your browser.** SilentSignals runs entirely in your web browser using 
+    Streamlit. We don't store, transmit, or share any information you enter.
+    
+    **Privacy commitment:**
+    - ✅ No data collection or storage
+    - ✅ No accounts or login required
+    - ✅ No tracking or analytics
+    - ✅ No external API calls
+    
+    This privacy-first design is intentional. Mental health and stress patterns are deeply personal. 
+    You should be able to explore your patterns without worrying about data privacy.
+    """)
+    
+    st.divider()
+    
+    # What This Is NOT Section
+    st.markdown("### ⚠️ What This Is NOT")
+    st.markdown("""
+    SilentSignals is **not** a diagnostic tool and does **not** provide medical advice or treatment.
+    
+    **We don't claim to:**
+    - ❌ Diagnose depression, anxiety, burnout, or any mental health condition
+    - ❌ Replace professional counseling or therapy
+    - ❌ Provide medical treatment or advice
+    - ❌ Offer validated clinical assessment
+    
+    **Instead, we offer:**
+    - ✅ **Awareness** — Notice patterns in your lifestyle
+    - ✅ **Explanation** — Understand how behaviors contribute to stress
+    - ✅ **Reflection** — Create space to think about your patterns
+    - ✅ **Guidance** — Suggest small, non-medical adjustments
+    
+    Think of SilentSignals as a gentle check-in system, like a friend who notices you seem tired 
+    lately and suggests you might need more rest.
+    """)
+    
+    st.divider()
+    
+    # When to Seek Help Section
+    st.markdown("### 🆘 When to Seek Professional Support")
+    st.info("""
+    **If you're experiencing significant distress, persistent mood changes, or thoughts of self-harm, please reach out to:**
+    
+    - 🏥 Campus counseling services
+    - 👥 A trusted friend or family member
+    - 🩺 A mental health professional
+    - 📞 Crisis hotlines (988 in the US for mental health emergencies)
+    
+    SilentSignals is designed to complement professional support, not replace it.
+    """)
+    
+    st.divider()
+    
+    # Tech & Transparency Section
+    st.markdown("### 💻 Tech Stack & Transparency")
+    st.markdown("""
+    Built with simplicity and transparency:
+    - **Python** + **Streamlit** for the web interface
+    - **Rule-based logic** — No machine learning, fully explainable
+    - **No external dependencies** — Everything runs locally
+    - **Open approach** — All logic is transparent
+    
+    This minimal tech stack ensures reliability, transparency, and absolute privacy.
+    """)
+    
+    st.divider()
+    
+    st.caption("""
+    **Demo Context:** SilentSignals was created for educational and awareness purposes. 
+    Use it for personal reflection and awareness, not as a substitute for professional care.
+    """)
+    st.caption("Built with care for student wellbeing | HealthTech | 2024")
