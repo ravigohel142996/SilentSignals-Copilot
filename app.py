@@ -19,15 +19,6 @@ st.markdown("""
         background-color: #E8EDF3;
     }
     
-    [data-testid="stSidebar"] .css-1d391kg {
-        padding-top: 2rem;
-    }
-    
-    /* Hide default sidebar title */
-    [data-testid="stSidebar"] h1 {
-        display: none;
-    }
-    
     /* Card Styling */
     .card {
         background-color: #FFFFFF;
@@ -193,16 +184,6 @@ st.markdown("""
     /* Progress Bar Styling */
     .stProgress > div > div > div > div {
         background-color: #3B82F6;
-    }
-    
-    /* Sidebar Footer */
-    .sidebar-footer {
-        position: fixed;
-        bottom: 1rem;
-        font-size: 0.8rem;
-        color: #64748B;
-        padding: 0 1rem;
-        line-height: 1.4;
     }
     
     /* Hide Streamlit branding */
@@ -456,27 +437,19 @@ if page == "Home":
         stress_index = st.session_state.stress_index
         zone_color, zone_label, _ = get_stress_zone(stress_index)
         
-        # Calculate burnout risk level
+        # Calculate burnout risk level and get zone class for styling
         if stress_index <= 35:
             burnout_risk = "Low"
-            risk_class = "zone-green"
+            zone_class = "zone-green"
         elif stress_index <= 65:
             burnout_risk = "Moderate"
-            risk_class = "zone-yellow"
+            zone_class = "zone-yellow"
         else:
             burnout_risk = "High"
-            risk_class = "zone-red"
+            zone_class = "zone-red"
         
         # Calculate lifestyle stability (inverse of stress)
         stability_score = 100 - stress_index
-        
-        # Get zone class for styling
-        if stress_index <= 35:
-            zone_class = "zone-green"
-        elif stress_index <= 65:
-            zone_class = "zone-yellow"
-        else:
-            zone_class = "zone-red"
         
         with col1:
             st.markdown(f"""
@@ -491,7 +464,7 @@ if page == "Home":
             st.markdown(f"""
             <div class="kpi-card">
                 <div class="kpi-label">Burnout Risk Level</div>
-                <div class="kpi-value {risk_class}">{burnout_risk}</div>
+                <div class="kpi-value {zone_class}">{burnout_risk}</div>
                 <div class="kpi-delta">Based on current patterns</div>
             </div>
             """, unsafe_allow_html=True)
